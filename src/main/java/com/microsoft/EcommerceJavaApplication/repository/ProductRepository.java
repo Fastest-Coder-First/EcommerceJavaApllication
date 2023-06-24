@@ -2,12 +2,17 @@ package com.microsoft.EcommerceJavaApplication.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import com.microsoft.EcommerceJavaApplication.model.Product;
 
+@Repository
 public class ProductRepository {
     // List to store products
     private List<Product> products = new ArrayList<Product>();
     
+    @Autowired
     public ProductRepository(){
         // Initialize the list of products
         products = new ArrayList<>();
@@ -64,10 +69,6 @@ public class ProductRepository {
             return null;
 
         }
-        // Get the total count of products in the repository
-        public int getCount(){
-            // Return the size of the list of products
-            return products.size();
-        }
+        
 
 }

@@ -1,21 +1,31 @@
 package com.microsoft.EcommerceJavaApplication.model;
-
+import javax.persistence.*;
+@Entity
 public class Product {
-    
-    //create field as id, name, category, quantity, price, description
-    private int id;
+    // Entity fields
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+     private int id;
     //add other fields
     private String name;
     private String category;
     private int quantity;
     private double price;
     private String description;
-    //create constructor
-    public Product(int id) {
-        this.id = id;
+
+     // Default constructor (required by JPA)
+    public Product() {
 
     }
-
+    
+// Constructor with parameters
+    public Product(String name, String category, int quantity, double price, String description) {
+        this.name = name;
+        this.category = category;
+        this.quantity = quantity;
+        this.price = price;
+        this.description = description;
+    }
 
     @Override
     public String toString() {
