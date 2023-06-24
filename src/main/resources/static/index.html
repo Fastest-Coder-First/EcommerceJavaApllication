@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>E-commerce Inventory Management System</title>
+    <style>
+        /* Add some basic styles to make the page visually appealing */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="text"], input[type="number"], textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>E-commerce Inventory Management System</h1>
+
+    <h2>Add Product</h2>
+    <form id="addProductForm">
+        <input type="text" id="name" placeholder="Product Name" required>
+        <input type="text" id="category" placeholder="Category" required>
+        <input type="number" id="quantity" placeholder="Quantity" required>
+        <input type="number" id="price" placeholder="Price" required>
+        <textarea id="description" placeholder="Description" required></textarea>
+        <input type="submit" value="Add Product">
+    </form>
+
+    <h2>Product List</h2>
+    <table id="productTable">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </table>
+
+    <div id="editProductModal" style="display: none;">
+        <h2>Edit Product</h2>
+        <form id="editProductForm">
+            <input type="hidden" id="editProductId">
+            <input type="text" id="editProductCategory" placeholder="Category" required>
+            <input type="number" id="editProductQuantity" placeholder="Quantity" required>
+            <input type="number" id="editProductPrice" placeholder="Price" required>
+            <textarea id="editProductDescription" placeholder="Description" required></textarea>
+            <input type="submit" value="Save Changes">
+        </form>
+    </div>
+
+    <script>
+        // Function to fetch all products and update the product table
+        function fetchProducts() {
+            fetch('/api/products')
+                .then(response => response.json())
+                .then(products => {
+                    const productTable = document.getElementById('productTable');
+                    productTable.innerHTML = `
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    `;
+
+                    products.forEach(product => {
+                        productTable.innerHTML += `
+                            <tr>
+                                <td>${product.id}</td>
+                                <td>${product.name}</td>
+                                <td>${product.category}</td>
+                                <td>${product.quantity}</td>
+                                <td>${product.price}</td>
+                                <td>${product.description}</td>
+                                <td>
+                                    <button onclick="editProduct(${product.id})">Edit</button>
+                                    <button onclick="deleteProduct(${product.id})">Delete</button>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        // Function to add a product
+        function addProduct(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const category = document.getElementById('category').value;
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const price = parseFloat(document.getElementById('price').value);
+            const description = document.getElementById('description').value;
+
+            const product = {
+                name: name,
+                category: category,
+                quantity: quantity,
+                price: price,
+                description: description
+            };
+
+            fetch('/api/products', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(product)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        document.getElementById('addProductForm').reset();
+                        fetchProducts();
+                    } else {
+                        throw new Error('Failed to add product.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        // Function to edit a product
+        function editProduct(id) {
+            const editProductModal = document.getElementById('editProductModal');
+            const editProductForm = document.getElementById('editProductForm');
+
+            fetch(`/api/products/${id}`)
+                .then(response => response.json())
+                .then(product => {
+                    document.getElementById('editProductId').value = product.id;
+                    document.getElementById('editProductCategory').value = product.category;
+                    document.getElementById('editProductQuantity').value = product.quantity;
+                    document.getElementById('editProductPrice').value = product.price;
+                    document.getElementById('editProductDescription').value = product.description;
+
+                    editProductModal.style.display = 'block';
+                    editProductForm.addEventListener('submit', saveChanges);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+                function saveChanges(event) {
+    event.preventDefault();
+
+    const id = document.getElementById('editProductId').value; // Get the product ID
+    const category = document.getElementById('editProductCategory').value;
+    const quantity = parseInt(document.getElementById('editProductQuantity').value);
+    const price = parseFloat(document.getElementById('editProductPrice').value);
+    const description = document.getElementById('editProductDescription').value;
+
+    const updatedProduct = {
+        category: category,
+        quantity: quantity,
+        price: price,
+        description: description
+    };
+
+    fetch(`/api/products/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedProduct)
+    })
+        .then(response => {
+            if (response.ok) {
+                editProductModal.style.display = 'none';
+                editProductForm.removeEventListener('submit', saveChanges);
+                updateProductRow(id, updatedProduct);
+            } else {
+                throw new Error('Failed to update product.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+        }
+
+        // Function to delete a product
+        function deleteProduct(id) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                fetch(`/api/products/${id}`, {
+                    method: 'DELETE'
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            fetchProducts();
+                        } else {
+                            throw new Error('Failed to delete product.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            }
+        }
+
+        // Attach event listener to the add product form submit event
+        document.getElementById('addProductForm').addEventListener('submit', addProduct);
+
+        // Fetch all products when the page loads
+        fetchProducts();
+    </script>
+</body>
+</html>
