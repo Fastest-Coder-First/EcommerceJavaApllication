@@ -41,28 +41,40 @@ To run the Inventory Management System on your local machine, follow these steps
 5. Access the application through your browser at `http://localhost:3000` (or the specified port).
 
 # Screenshots
+![Screenshot 1 (1)](https://github.com/Fastest-Coder-First/EcommerceJavaApllication/assets/51746097/0c73e716-58c4-4ee8-acef-32f2b59b090e)
 
 <p align="center">
-  <b>Above Figure contains Homepage of Inventory Management System.
+  <b>Above Figure shows the Dashboard of Inventory Management System.
+</b>
+</p>
+
+![Screenshot 1 (3)](https://github.com/Fastest-Coder-First/EcommerceJavaApllication/assets/51746097/65cfbab3-7bc0-46aa-a3b1-f008356084fc)
+
+<p align="center">
+  <b>Above Figure contains Add Inventory of Inventory Management System.
+</b>
+</p>
+
+![Screenshot 1 (5)](https://github.com/Fastest-Coder-First/EcommerceJavaApllication/assets/51746097/53f38794-0f02-460b-a119-6181e0aeb29f)
+
+<p align="center">
+  <b>Above Figure shows added Products in Inventory Management System.
 </b>
 </p>
 
 
+![Screenshot 1 (2)](https://github.com/Fastest-Coder-First/EcommerceJavaApllication/assets/51746097/dee16c0d-23bb-415b-b0a7-1bcde09c68d5)
+
 <p align="center">
-  <b>Above Figure contains View Inventory of Inventory Management System.
+  <b>Above Figure asking confirmation of Deletion of Product in Inventory Management System.
 </b>
 </p>
 
 
-<p align="center">
-  <b>Above Figure contains View Adding of Products in Inventory Management System.
-</b>
-</p>
-
-
+![Screenshot 1 (3)](https://github.com/Fastest-Coder-First/EcommerceJavaApllication/assets/51746097/e3efcf52-3a74-4fac-b790-2fc7b42e054e)
 
 <p align="center">
-  <b>Above Figure contains Deletion of Product in Inventory Management System.
+  <b>Above Figure after Deletion of Product in Inventory Management System.
 </b>
 </p>
 
