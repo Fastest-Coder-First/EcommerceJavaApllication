@@ -42,28 +42,24 @@ To run the Inventory Management System on your local machine, follow these steps
 
 # Screenshots
 
-we![screenshot1](https://github.com/Fastest-Coder-First/EcommerceJavaApllication/assets/51746097/3e7825cc-47c8-4fa7-84e3-300aac736f3c)
 <p align="center">
   <b>Above Figure contains Homepage of Inventory Management System.
 </b>
 </p>
 
 
-we![screenshot2](https://github.com/Fastest-Coder-First/EcommerceJavaApllication/assets/51746097/ce02f614-4a8f-48a2-83ef-d44673d352b2)
 <p align="center">
   <b>Above Figure contains View Inventory of Inventory Management System.
 </b>
 </p>
 
 
-we![screenshot3](https://github.com/Fastest-Coder-First/EcommerceJavaApllication/assets/51746097/cd77aa07-4cfb-4629-b6d2-d915df4d5460)
 <p align="center">
   <b>Above Figure contains View Adding of Products in Inventory Management System.
 </b>
 </p>
 
 
-![delete screenshot](https://github.com/Fastest-Coder-First/EcommerceJavaApllication/assets/51746097/4a90df70-e618-4086-8794-74640dfcda46)
 
 <p align="center">
   <b>Above Figure contains Deletion of Product in Inventory Management System.
