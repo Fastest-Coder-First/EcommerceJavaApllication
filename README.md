@@ -2,6 +2,11 @@
 
 This project was developed as part of a team-driven hackathon, organized by Microsoft, with the aim of creating an Inventory Management System for an e-commerce platform. The project utilized the power of GitHub Copilot, an AI-driven code completion tool, to enhance the development process and streamline collaboration among team members. This README file provides an overview of the project, its functionalities, and the impact of GitHub Copilot on the development and submission process.
 
+## Technologies Used:
+Frontend: HTML, CSS
+<br>
+Backend: Java, Springboot
+
 ## Project Overview
 
 The Inventory Management System is designed to facilitate efficient management of products, ensuring accurate stock tracking and seamless product updates. The system incorporates the following functionalities:
